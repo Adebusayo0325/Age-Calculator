@@ -67,12 +67,13 @@ input:active {
   border: solid 2px hsl(259, 100%, 65%);
   outline: 0;
 }
-input:invalid {
+/* input:invalid {
   border: solid 2px hsl(0, 100%, 67%);
-}
+} */
 input.error {
   border: solid 2px hsl(0, 100%, 67%);
 }
+
 form {
   display: flex;
   justify-content: space-evenly;
