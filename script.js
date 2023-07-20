@@ -1,6 +1,7 @@
 let hasDayError = false
 let hasMonthError = false
 let hasYearError = false
+let hasFutureError = false;
 
 function calculateAge() {
   let birthMonthInput = document.getElementById("month").value;
@@ -100,6 +101,7 @@ let hasError = false
         document.querySelector('#day').classList.remove("error")
 
       }
+      
   if ((birthMonthInput !== "" && birthMonthInput > 12) || birthMonthInput < 0) {
     monthError.innerText = `Must be a valid month`;
     monthLabelError.classList.add("error");
@@ -132,7 +134,7 @@ let hasError = false
     yearError.innerText = `Must be a valid year`;
     yearLabelError.classList.add("error");
     yearError.style.opacity = "1";
-        hasYearError = true
+        hasYearError = true;
         document.querySelector('#year').classList.add("error")
 
 
@@ -151,7 +153,33 @@ let hasError = false
         document.querySelector('#year').classList.remove("error")
 
   }
- 
+
+  if(birthYearInput != currentDate.getFullYear() || (birthYearInput < currentDate.getFullYear())  ){
+    hasFutureError= false
+  hasMonthError = false
+        hasYearError = false;
+        hasFutureError = false
+  }
+  else{
+      if(document.getElementById('month').value > currentDate.getMonth() ){
+       document.querySelector("#year-error").innerText = `Must be in the past`;
+  document.querySelector("#month-error").innerText = `You're yet to be born`;
+    document.querySelector(".year-label").classList.add("error");
+    document.querySelector("#year-error").style.opacity = "1";
+        document.querySelector(".month-label").classList.add("error");
+        document.querySelector("#month-error").style.opacity = "1"
+hasMonthError = true
+        hasYearError = true;
+        hasFutureError = true
+        document.querySelector('#year').classList.add("error")
+        // validateAge()
+        // document.querySelector('#year').value = ''
+        console.log('ERROR')
+}
+
+}
+
+
   return !hasError
 }                                                                                           
 //event listeners
@@ -167,42 +195,33 @@ document.querySelector("#form").addEventListener("submit", (e) => {
 });
 
 function formValidate (){
+
 //first we check if the year we are working with has viable inputs
-     if(document.querySelector('#year').value.length === 3 || document.querySelector('#year').value.length === 1){
+     if(document.querySelector('#year').value.length > 4 || (document.querySelector('#year').value.length === 3 || document.querySelector('#year').value.length === 1)){
        document.querySelector("#year-error").innerText = `YY OR YYYY only`
        document.querySelector("#year-error").style.opacity = '1'
        document.querySelector(".year-label").classList.add('error')
     }
 
-    else{
-      //else we check if the validateAge parameters have any errors 
-      let correctDate = new Date()
-       let birthYearInput = document.getElementById("year").value;
-       let birthMonthInput = document.getElementById("month").value;
- if(birthYearInput === correctDate.getFullYear()){
 
-  if (document.getElementById('month').value > correctDate.getMonth()  ){
-  document.querySelector("#year-error").innerText = `Must be a valid year`;
-  document.querySelector("#month-error").innerText = `You're yet to be born`;
-    document.querySelector(".year-label").classList.add("error");
-    document.querySelector("#year-error").style.opacity = "1";
-        document.querySelector(".month-label").classList.add("error");
-        document.querySelector("#month-error").style.opacity = "1"
-hasMonthError = true
-        hasYearError = true;
-        document.querySelector('#year').classList.add("error")
+ if(document.querySelector('#month').value.length > 2){
+  document.querySelector('#month-error').innerText = `MM only
+  or 00 `;
+  document.querySelector('#month-error').style.opacity = '1';
+  document.querySelector('.month-label').classList.add('error')
+ }
 
-  }
-  else{
-    validateAge()
-  }
-}else{
+ else {
+  //nested if statements to check in a stepwise manner if an error is present
   if(!hasDayError){
     if(  !hasMonthError){
       if(!hasYearError){
-        //if no error was found we run our function to calculate age and also validatAge incase the user changes something amisdt the code
-     calculateAge()
+        if(!hasFutureError){
+  calculateAge()
 validateAge()
+        }
+        //if no error was found we run our function to calculate age and also validatAge incase the user changes something amisdt the code
+   
   }
  
 }
@@ -210,8 +229,6 @@ validateAge()
    else{
     //if the errorHandlers return true we validate age
              validateAge();
-
-  }
 }
     }
-}
+  }
