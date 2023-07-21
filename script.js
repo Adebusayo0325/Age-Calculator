@@ -150,6 +150,10 @@ let hasError = false
     yearError.style.opacity = "0";
     yearLabelError.classList.remove("error");
         hasYearError = false
+            hasFutureError= false
+  hasMonthError = false
+        hasYearError = false;
+        hasFutureError = false
         document.querySelector('#year').classList.remove("error")
 
   }
@@ -161,7 +165,7 @@ let hasError = false
         hasFutureError = false
   }
   else{
-      if(document.getElementById('month').value > currentDate.getMonth() ){
+      if(document.getElementById('month').value > (currentDate.getMonth() + 1) ){
        document.querySelector("#year-error").innerText = `Must be in the past`;
   document.querySelector("#month-error").innerText = `You're yet to be born`;
     document.querySelector(".year-label").classList.add("error");
