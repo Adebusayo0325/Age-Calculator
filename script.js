@@ -80,7 +80,7 @@ function validateAge() {
   let yearLabelError = document.querySelector(".year-label");
   let currentDate = new Date();
 let hasError = false
-  if (birthDayInput !== "" && (birthDayInput > 30 || birthDayInput < 0)) {
+  if (birthDayInput !== "" && (birthDayInput > 31 || birthDayInput < 0)) {
     dayError.innerText = `Must be a valid day`;
     dayLabelError.classList.add("error");
     dayError.style.opacity = "1";
