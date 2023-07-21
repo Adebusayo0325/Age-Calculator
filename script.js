@@ -131,7 +131,7 @@ let hasError = false
 
   if (birthYearInput !== "" && birthYearInput > currentDate.getFullYear()) {
   
-    yearError.innerText = `Must be a valid year`;
+    yearError.innerText = `Must be in the past`;
     yearLabelError.classList.add("error");
     yearError.style.opacity = "1";
         hasYearError = true;
@@ -154,7 +154,7 @@ let hasError = false
 
   }
 
-  if(birthYearInput != currentDate.getFullYear() || (birthYearInput < currentDate.getFullYear())  ){
+  if(birthYearInput < currentDate.getFullYear() ){
     hasFutureError= false
   hasMonthError = false
         hasYearError = false;
@@ -172,10 +172,7 @@ hasMonthError = true
         hasYearError = true;
         hasFutureError = true
         document.querySelector('#year').classList.add("error")
-        // validateAge()
-        // document.querySelector('#year').value = ''
-        console.log('ERROR')
-}
+    }
 
 }
 

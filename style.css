@@ -114,6 +114,9 @@ p {
   padding: 0.8rem;
   background-color: hsl(259, 100%, 65%);
 }
+.btn:hover{
+  background-color: black;
+}
 .btn img {
   width: 20px;
   height: 18px;
